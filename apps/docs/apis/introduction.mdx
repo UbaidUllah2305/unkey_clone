@@ -1,0 +1,113 @@
+---
+title: Overview
+description: Protect your public APIs
+mode: "wide"
+---
+
+Unkey provides a simple feature rich API key management system. You can use Unkey to protect your public APIs with ease. Below is an example of implementing Unkey in your API.
+
+<CodeGroup>
+
+```ts Typescript
+import { verifyKey } from '@unkey/api';
+
+const { result, error } = await verifyKey({
+  apiId: "api_123",
+  key: "xyz_123"
+})
+
+if ( error ) {
+  // handle network error
+}
+
+if ( !result.valid ) {
+  // reject unauthorized request
+}
+```
+
+```py Python
+import asyncio
+import os
+import unkey
+
+async def main() -> None:
+  client = unkey.Client(api_key=os.environ["API_KEY"])
+  await client.start()
+
+  result = await client.keys.verify_key("prefix_abc123")
+
+  if result.is_ok:
+    print(data.valid)
+  else:
+    print(result.unwrap_err())
+
+```
+```go Golang
+package main
+
+import(
+	"context"
+	unkeygo "github.com/unkeyed/unkey-go"
+	"github.com/unkeyed/unkey-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkeygo.New(
+        unkeygo.WithSecurity("UNKEY_ROOT_KEY"),
+    )
+
+    res, err := s.Keys.VerifyKey(ctx, components.V1KeysVerifyKeyRequest{
+        APIID: unkeygo.String("api_1234"),
+        Key: "sk_1234",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V1KeysVerifyKeyResponse != nil {
+        // handle response
+    }
+}
+```
+```bash cURL
+curl --request POST \
+  --url https://api.unkey.dev/v1/keys.verifyKey \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "apiId": "api_1234",
+    "key": "sk_1234"
+  }'
+```
+
+
+</CodeGroup>
+
+## Features
+
+Below are some of the key features of Unkey API key management system, for you to explore.
+
+<CardGroup cols={2}>
+  <Card title="Ratelimiting" href="/apis/features/ratelimiting"  >
+   Key based ratelimiting
+  </Card>
+  <Card title="Usage limited keys"  href="/apis/features/remaining">
+    Set usage limits per key
+  </Card>
+   <Card title="Temporary Keys"  href="/apis/features/temp-keys">
+    Keys that expire after a set time
+  </Card>
+  <Card title="Refillable Keys"  href="/apis/features/refill">
+   Refill your remaining keys on a set schedule
+ </Card>
+ <Card title="Analytics"  href="/apis/features/analytics">
+  Rich analytics on your API and keys
+</Card>
+<Card title="Environments"  href="/apis/features/environments">
+ Separate your keys into live and test environments
+</Card>
+<Card title="Authorization"  href="/apis/features/authorization/introduction">
+ Access Control with Roles and Permissions
+</Card>
+  </CardGroup>

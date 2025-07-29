@@ -1,0 +1,84 @@
+---
+title: Usage limited keys
+description: 'Limiting the usage of keys'
+---
+
+Sometimes you would like to create an api key and automatically invalidate it after a certain number of uses.
+
+Example:
+You are selling API access and a customer has purchased 1000 api requests from you.
+
+Unkey allows you to set/update usage limits on individual keys and we take care of invalidating a key after it has reached its limit.
+
+
+
+
+
+### Example
+
+Let's create a new key, which can be used 100 times.
+
+```bash
+curl --request POST \
+  --url https://api.unkey.dev/v1/keys.createKey \
+  --header 'Authorization: Bearer <UNKEY>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"apiId":"<API_ID>",
+	"remaining": 100
+}'
+```
+
+Now when you verify the new key, you will receive back the remaining verifications and after all of them are used up, the key is invalid.
+
+
+```bash
+curl --request POST \
+  --url https://api.unkey.dev/v1/keys.verifyKey \
+  --header 'Content-Type: application/json' \
+  --data '{
+      "apiId":"<API_ID>",
+      "key": "<NEW_KEY>"
+	}'
+```
+
+```json
+{
+	"valid": true,
+	"remaining": 99
+}
+```
+
+
+<Note>
+The returned `remaining` value represents how many verifications are remaining after the current one.
+A value of 3, means you can verify the key successfully 3 more times.
+</Note>
+
+
+
+## Custom cost
+
+By default we deduct `1` from the remaining verifications, but in some cases you need to deduct more.
+
+You can override this in the request body. In this example unkey would deduct `4` for every valid verification.
+If a key would only have 3 remaining, the request would be rejected, as there is not enough remaining left.
+
+
+<Note>
+  There is a special case when you set `cost = 0`. In this case, the request will always be valid, but will not deduct anything.
+
+</Note>
+
+```bash {7-9}
+curl --request POST \
+  --url https://api.unkey.dev/v1/keys.verifyKey \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "apiId":"<API_ID>",
+    "key": "<NEW_KEY>",
+    "remaining": {
+      "cost": 4
+    }
+  }'
+```

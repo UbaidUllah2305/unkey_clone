@@ -1,0 +1,170 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "maxSize": 1572864
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "noSvgWithoutTitle": "off",
+        "useSemanticElements": "warn",
+        "useFocusableInteractive": "warn"
+      },
+      "correctness": {
+        "noUnusedVariables": "error",
+        "useExhaustiveDependencies": "warn",
+        "noUnusedImports": "error",
+        "noChildrenProp": "off",
+        "useJsxKeyInIterable": "error",
+        "noUnsafeOptionalChaining": "error"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "error"
+      },
+      "style": {
+        "useBlockStatements": "error",
+        "noNonNullAssertion": "error",
+        "useConst": "error",
+        "noUselessElse": "error",
+        "useImportType": "error",
+        "useFragmentSyntax": "error",
+        "useAsConstAssertion": "error",
+        "useTemplate": "error",
+        "noYodaExpression": "error",
+        "noUnusedTemplateLiteral": "error",
+        "noNegationElse": "error",
+        "useSelfClosingElements": "error",
+        "useShorthandAssign": "error",
+        "noParameterAssign": "error",
+        "useNumberNamespace": "error",
+        "noVar": "error",
+        "useSingleVarDeclarator": "error",
+        "noDefaultExport": "error",
+        "useExportType": "error",
+        "useThrowOnlyError": "error",
+        "noShoutyConstants": "error",
+        "useDefaultParameterLast": "error"
+      },
+      "performance": {
+        "noDelete": "off"
+      },
+      "suspicious": {
+        "noDoubleEquals": "error",
+        "useIsArray": "error",
+        "noFallthroughSwitchClause": "error",
+        "noExplicitAny": "error",
+        "noConsoleLog": "warn",
+        "recommended": true
+      },
+      "complexity": {
+        "noForEach": "off",
+        "noExtraBooleanCast": "error",
+        "noUselessTernary": "error",
+        "noUselessTypeConstraint": "error",
+        "noUselessStringConcat": "error",
+        "useOptionalChain": "error",
+        "useDateNow": "error"
+      }
+    },
+    "ignore": [
+      ".vitest",
+      "node_modules",
+      ".next",
+      "dist",
+      ".nuxt",
+      "./packages/api/src/openapi.d.ts",
+      "./internal/auth-migrator/",
+      ".wrangler",
+      ".react-email",
+      ".content-collections",
+      ".source",
+      ".trigger"
+    ]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "enabled": true,
+    "lineWidth": 100,
+    "ignore": [
+      "node_modules",
+      ".next",
+      "dist",
+      ".nuxt",
+      ".wrangler",
+      ".react-email",
+      ".content-collections",
+      ".source",
+      ".trigger",
+      "./internal/auth-migrator"
+    ]
+  },
+  "organizeImports": {
+    "enabled": true,
+    "ignore": [
+      "node_modules",
+      ".next",
+      "dist",
+      ".nuxt",
+      ".wrangler",
+      ".react-email",
+      ".content-collections",
+      "./internal/auth-migrator"
+    ]
+  },
+  "overrides": [
+    {
+      "include": ["cmd/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsoleLog": "off",
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": [
+        "**/*.test.*",
+        "**/*.spec.*",
+        "**/__tests__/**",
+        "**/test/**",
+        "**/tests/**",
+        "**/tools/**",
+        "**/v1_*.ts"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsoleLog": "off",
+            "noExplicitAny": "off"
+          },
+          "style": {
+            "noNonNullAssertion": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": [
+        "**/page.tsx",
+        "**/layout.tsx",
+        "**/loading.tsx",
+        "**/error.tsx",
+        "**/not-found.tsx",
+        "**/route.ts",
+        "**/*.config.*"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noDefaultExport": "off"
+          }
+        }
+      }
+    }
+  ]
+}

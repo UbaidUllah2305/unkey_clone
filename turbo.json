@@ -1,0 +1,79 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "tasks": {
+    "install": {
+      "outputs": ["node_modules/**", "pnpm-lock.yaml", "yarn.lock"]
+    },
+    "build": {
+      "dependsOn": ["fmt", "^build"],
+      "env": [
+        "NEXT_PUBLIC_\\*",
+        "\\!NEXT_PUBLIC_VERCEL_\\*",
+        "AGENT_URL",
+        "AGENT_TOKEN",
+        "CLERK_WEBHOOK_SECRET",
+        "CLERK_SECRET_KEY",
+        "DATABASE_PASSWORD",
+        "DATABASE_USERNAME",
+        "DATABASE_HOST",
+        "PLAIN_API_KEY",
+        "QSTASH_CURRENT_SIGNING_KEY",
+        "QSTASH_NEXT_SIGNING_KEY",
+        "RESEND_AUDIENCE_ID",
+        "RESEND_API_KEY",
+        "SLACK_WEBHOOK_URL_SIGNUP",
+        "STRIPE_PRODUCT_ID_ACTIVE_KEYS",
+        "STRIPE_ACTIVE_KEYS_PRODUCT_ID",
+        "STRIPE_PRODUCT_ID_KEY_VERIFICATIONS",
+        "STRIPE_PRODUCT_ID_PRO_PLAN",
+        "STRIPE_PRODUCT_ID_SUPPORT",
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET",
+        "CLICKHOUSE_URL",
+        "UNKEY_API_ID",
+        "UNKEY_KEY_AUTH_ID",
+        "UNKEY_WEBHOOK_KEYS_API_ID",
+        "UNKEY_WORKSPACE_ID",
+        "VERCEL_INTEGRATION_CLIENT_ID",
+        "VERCEL_INTEGRATION_CLIENT_SECRET",
+        "AUTH_PROVIDER",
+        "WORKOS_COOKIE_PASSWORD",
+        "WORKOS_API_KEY",
+        "WORKOS_CLIENT_ID",
+        "NEXT_PUBLIC_WORKOS_REDIRECT_URI"
+      ],
+      "outputs": ["dist/**", ".output/**", ".nuxt/**", ".next/**", "!.next/cache/**"]
+    },
+    "@unkey/nuxt#dev:prepare": {
+      "outputs": ["dist/**", "playground/.nuxt/**"]
+    },
+    "@unkey/nuxt#test": {
+      "dependsOn": ["@unkey/api#build", "@unkey/nuxt#dev:prepare"],
+      "outputs": []
+    },
+    "@unkey/nuxt#build": {
+      "dependsOn": ["@unkey/nuxt#dev:prepare"]
+    },
+    "fmt": {
+      "cache": false
+    },
+    "lint": {
+      "cache": false
+    },
+    "dev": {
+      "cache": false
+    },
+    "test": {
+      "cache": false
+    },
+    "start": {
+      "cache": false
+    },
+    "bootstrap": {
+      "cache": false
+    },
+    "migrate": {
+      "cache": false
+    }
+  }
+}

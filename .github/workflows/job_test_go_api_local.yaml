@@ -1,0 +1,29 @@
+name: Test Go API Local
+on:
+  workflow_call:
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/actions/install
+        with:
+          go: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run containers
+        run: make up
+        working-directory: go
+      - name: Test
+        run: make test-full
+        working-directory: go
+        env:
+          INTEGRATION_TEST: true
+          SIMULATION_TEST: false
