@@ -8,7 +8,7 @@
   "devDependencies": {
     "drizzle-kit": "^0.22.7",
     "typescript": "^5.5.3",
-    "vitest": "^1.6.1"
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@unkey/encoding": "workspace:^",
