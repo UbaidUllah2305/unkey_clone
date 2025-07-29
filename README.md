@@ -17,13 +17,3 @@ We welcome contributions! To ensure your work doesn't conflict with ongoing work
 3. Get approval from a core team member
 
 This helps us align efforts and prevents duplicated or conflicting work.
-
-## Let's talk
-
-<a href="https://cal.com/team/unkey/user-interview?utm_source=banner&utm_campaign=oss"><img alt="Book us with Cal.com" src="https://cal.com/book-with-cal-dark.svg" /></a>
-
-## Authors
-
-<a href="https://github.com/unkeyed/unkey/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=unkeyed/unkey" />
-</a>
